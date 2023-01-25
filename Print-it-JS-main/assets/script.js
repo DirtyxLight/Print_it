@@ -1,4 +1,4 @@
-/*const slides = [
+const slides = [
 	{
 		"image":"slide1.jpg",
 		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
@@ -16,12 +16,6 @@
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
-*/
-// Récupération des pièces depuis le fichier JSON
-const reponse = await fetch('const.json');
-const slides = await reponse.json();
-
-
 const bannerImg = document.createElement("img");
 bannerImg.src = slides.image;
 
