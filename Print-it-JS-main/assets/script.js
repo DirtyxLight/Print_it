@@ -18,56 +18,43 @@ const slides = [
 ];
 
 
-const next = document.querySelector('.arrow_right');
-const previous = document.querySelector('.arrow_left');
+const next = document.querySelector('.arrow_right'),
+	  previous = document.querySelector('.arrow_left'),
+	  dots = document.querySelector('.dots');
 let index = 0;
-const dots = document.querySelector('.dots');
+
 
 for (let i in slides) {
-	const nav = document.createElement("div");
-	dots.appendChild(nav)
-	nav.className = "dot";
-
-	console.log(nav);
+	const dot = document.createElement("div");
+	dots.appendChild(dot);
+	dot.className = "dot";
 }
 
-const dot = document.getElementsByClassName('dot');
-function color(){
-	if (dot === currentSlide(index)){
-		dot.className = "dot_selected";
-	}
-}
-
-console.log(dot);
-
-
-
-
-
+let selectedDot = document.querySelectorAll(".dot")[index];
 const bannerImg = document.createElement("img");
-banner.appendChild(bannerImg);
-bannerImg.className = "banner-img";
-const currentSlide = n => {
-	bannerImg.src = slides[n].image;
-}
-currentSlide(index)
-
 const nameLine = document.createElement("p");
+banner.appendChild(bannerImg);
 banner.appendChild(nameLine);
-const currentTagLine = n => {
-	nameLine.innerHTML = slides[n].tagLine;
-}
-currentTagLine(index)
+bannerImg.classList.add("banner-img");
+
+
+const changeCurrentSlide = () => {
+	bannerImg.src = slides[index].image;
+	nameLine.innerHTML = slides[index].tagLine;
+	selectedDot.classList.remove('dot_selected');
+	selectedDot = document.querySelectorAll(".dot")[index];
+	selectedDot.classList.add('dot_selected');
+ };
+ changeCurrentSlide();
+
 
 
 next.addEventListener('click', (e) => {
-	index = (index + 1) % slides.length
-	currentSlide(index)
-	currentTagLine(index)
-})
+	index = (index + 1) % slides.length;
+	changeCurrentSlide();
+});
 
 previous.addEventListener('click', (e) => {
-	index = (index + slides.length - 1) % slides.length
-	currentSlide(index)
-	currentTagLine(index)
-})
+	index = (index + slides.length - 1) % slides.length;
+	changeCurrentSlide();
+});
